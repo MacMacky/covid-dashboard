@@ -87,9 +87,9 @@ const ModifyResponseCallback: ModifyResponseCB = (responses) => {
 	return result
 }
 
-const formatNumber = (x: string | number): string => {
+const formatNumber = (x: null | number): string => {
 	if (!x) return ''
-	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+	return x.toLocaleString()
 }
 
 export {

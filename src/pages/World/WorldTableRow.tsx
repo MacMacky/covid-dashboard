@@ -1,17 +1,22 @@
 import React, { memo } from 'react'
+import { History } from 'history'
 import { formatNumber } from '../../helpers'
 import { Align, RowData } from '../../helpers/types'
 import { TableCell, TableRow } from '@material-ui/core'
 
 interface WorldTableRowData extends RowData {
-	align?: Align
+	align?: Align,
+	history: History
 }
 
-
-const WorldTableRow = memo(({ active, align, cases, todayCases, deaths, recovered, critical, code, country }: WorldTableRowData) => {
-	console.log('rendering')
+const WorldTableRow = memo(({ active, align, cases, todayCases, deaths, recovered, critical, code, country, history }: WorldTableRowData) => {
 	return (
-		<TableRow>
+		<TableRow hover
+			style={{ cursor: 'hover' }}
+			onClick={() => {
+				const _country = (country.includes(' ') ? country.split(' ').join('-') : country).toLowerCase()
+				history.push(`/world/${_country}`, { country })
+			}}>
 			<TableCell align={align}>
 				{code ? <img src={`https://flagcdn.com/w40/${code.toLowerCase()}.png`} /> :
 					null}

@@ -1,5 +1,5 @@
 import countries from './countries'
-import { Country, Regions, Data, ModifyResponseCB, RowData } from './types'
+import { Country, Regions, Data, ModifyResponseCB, RowData, SortOption } from './types'
 
 const log = (...messages: any[]) => console.log(...messages)
 
@@ -92,12 +92,47 @@ const formatNumber = (x: null | number): string => {
 	return x.toLocaleString()
 }
 
+
+const sortComparison = ({ type, sortBy, orderBy }: SortOption) => (a: any, b: any) => {
+	if (type === 'string') {
+		if (orderBy === 'asc') {
+			return a[sortBy].localeCompare(b[sortBy])
+		} else {
+			return b[sortBy].localeCompare(a[sortBy])
+		}
+	} else {
+		if (orderBy === 'asc') {
+			return a[sortBy] - b[sortBy]
+		} else {
+			return b[sortBy] - a[sortBy]
+		}
+	}
+}
+
+const sortCallback = (oldData: RowData[], options: SortOption) => {
+	const newData = oldData.slice().sort(sortComparison(options))
+	return newData
+}
+
+const filterCallback = (searchTerm: string | number | null, data: RowData[] | null) => {
+	if (!data) return []
+	return data.filter(d => {
+		if (Number.isNaN(Number(searchTerm))) {
+			return d.country.toLowerCase().includes((searchTerm as string).toLowerCase())
+		} else {
+			return Object.keys(d).some((key: any) => d[key as keyof RowData]?.toString().includes(searchTerm as string))
+		}
+	})
+}
+
 export {
 	all,
 	log,
 	pick,
 	capitalize,
 	formatNumber,
+	sortCallback,
+	filterCallback,
 	groupByRegions,
 	getCountryData,
 	ModifyResponseCallback

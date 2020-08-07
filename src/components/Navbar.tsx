@@ -18,13 +18,13 @@ const Navbar = () => {
 		}
 
 	}, [type])
+
 	return (
 		<div style={{ flexGrow: 1 }}>
 			<AppBar position="static" color="primary" style={themeStyles}>
 				<Toolbar>
 					<Typography children="Covid" variant="h6" style={{ flexGrow: 1 }} />
 					<ButtonLink to="/" label="Main" />
-					<ButtonLink to="/countries" label="Countries" />
 					<ButtonLink to="/world" label="World" />
 					<ButtonLink to="/about" label="About" />
 					<IconButton onClick={() => {

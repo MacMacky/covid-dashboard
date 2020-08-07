@@ -94,6 +94,4 @@ export interface State {
 	options: SortOption
 }
 
-
-
-export type ModifyResponseCB = (responses: any[][]) => any
+export type ModifyResponseCB<T = any> = (responses: any[][] | any) => T

@@ -8,19 +8,19 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 
 
 function App(props: any) {
-  return (
-    <ThemeProvider theme={props.theme}>
-      <Router>
-        <Navbar />
-        <Switch>
-          <Route component={Main} path="/" exact />
-          <Route component={Country} path="/countries" />
-          <Route component={World} path="/world" />
-          <Redirect to="/" />
-        </Switch>
-      </Router>
-    </ThemeProvider>
-  );
+	return (
+		<ThemeProvider theme={props.theme}>
+			<Router>
+				<Navbar />
+				<Switch>
+					<Route component={Main} path="/" exact />
+					<Route component={Country} path="/world/:country" />
+					<Route component={World} path="/world" />
+					<Redirect to="/" />
+				</Switch>
+			</Router>
+		</ThemeProvider>
+	);
 }
 
 

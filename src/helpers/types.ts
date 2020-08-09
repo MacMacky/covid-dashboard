@@ -1,3 +1,7 @@
+type Partial<T> = {
+	[P in keyof T]?: T[P]
+}
+
 export interface Country {
 	alpha2Code: string
 	alpha3Code: string
@@ -95,3 +99,33 @@ export interface State {
 }
 
 export type ModifyResponseCB<T = any> = (responses: any[][] | any) => T
+
+
+export interface CountryBase {
+	date: string
+}
+
+export interface CountryDeath extends CountryBase {
+	deaths: number
+}
+export interface CountryConfirmed extends CountryBase {
+	confirmed: number
+}
+export interface CountryRecovered extends CountryBase {
+	recovered: number
+}
+
+export type S = Partial<CountryRecovered>[] | Partial<CountryConfirmed>[] | Partial<CountryDeath>[]
+
+export interface CountryData {
+	deaths?: CountryDeath[]
+	confirmed?: CountryConfirmed[]
+	recovered?: CountryRecovered[]
+}
+
+export interface ChartProps {
+	loading: boolean
+	data: any[] | undefined
+	color: string
+	dataKey: string
+}

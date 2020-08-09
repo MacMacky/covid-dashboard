@@ -14,9 +14,9 @@ const useChangeDocumentTitle = () => {
 	}, [])
 }
 
-const useFetch = <T = any>(urls: string | string[], modifyResponseCallback?: ModifyResponseCB): [string | null, boolean, T] => {
+const useFetch = <T = any>(urls: string | string[], modifyResponseCallback?: ModifyResponseCB, defaultResponseValue: any[] | any = []): [string | null, boolean, T] => {
 	const [loading, setLoading] = useState(false)
-	const [response, setResponse] = useState<any>(null)
+	const [response, setResponse] = useState<any>(defaultResponseValue)
 	const [error, setError] = useState<string | null>(null)
 
 	useEffect(() => {

@@ -1,82 +1,45 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import '../App.css'
-import countries from '../helpers/countries'
-import { Country2 } from '../helpers/types'
+import renderChart from '../components/renderChart'
 import { PaperContainer } from '../containers/PaperContainer'
 import { RouteComponentProps } from 'react-router-dom'
-import { TextField, Paper, Grid } from '@material-ui/core'
-import { useChangeDocumentTitle } from '../helpers/hooks';
-import { Autocomplete, Skeleton } from '@material-ui/lab'
+import { modifyResponseCountryCB } from '../helpers'
+import { useFetch, useChangeDocumentTitle } from '../helpers/hooks';
+import { CountryData, Chart, CountryRouteProps } from '../helpers/types'
+import { Grid, Select, MenuItem, FormControl, InputLabel } from '@material-ui/core'
 
 
+const Country = ({ location: { state } }: RouteComponentProps<{}, {}, CountryRouteProps>) => {
+	const [error, loading, response] = useFetch<CountryData>('https://pomber.github.io/covid19/timeseries.json',
+		modifyResponseCountryCB(state), {})
+	const [chart, setChart] = useState<Chart>('bar')
 
+	const handleChartChange = (e: any): void => {
+		setChart(e.target.value)
+	}
 
-const Country = (props: RouteComponentProps) => {
-  const [country, setCountry] = useState<Country2>({})
-  const [resp, setResp] = useState<any>({})
-  const [loading, setLoading] = useState(false)
+	useChangeDocumentTitle()
 
-  useEffect(() => {
-    setLoading(true)
-    const abort = new AbortController()
-    const getCountryData = async () => {
-      try {
-        if (country && country.abbr) {
-
-          //https://flagcdn.com/w320/za.png
-          //const response = await fetch(`https://restcountries.eu/rest/v2/alpha/${country.abbr}`, { signal: abort.signal })
-          // const response = await fetch(`https://flagcdn.com/w320/${country.abbr}.png`, { signal: abort.signal, mode: 'no-cors' })
-          // const result = await response.json()
-          //sconsole.log(result)
-          setResp(`https://flagcdn.com/w320/${country.abbr.toLowerCase()}.png`)
-        }
-      } catch (e) {
-        console.log(e)
-      } finally {
-        setLoading(false)
-      }
-    }
-    getCountryData()
-    return () => abort.abort()
-  }, [country.name])
-
-  useChangeDocumentTitle()
-  return (
-    <PaperContainer>
-      <Grid item>
-        <Autocomplete
-          id="countries"
-          options={countries}
-          freeSolo
-          disableClearable
-          onChange={(e, newValue) => {
-            setCountry(newValue as Country2)
-          }}
-          style={{ width: 350 }}
-          getOptionLabel={option => option.name}
-          renderInput={(params) => <TextField {...params} label="Countries" variant="outlined" />}
-        />
-      </Grid>
-      <Grid item>
-        {
-          loading ?
-            <Skeleton variant="rect" width={500} height={300} />
-            : <div style={{
-              backgroundImage: `url(${resp})`,
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              backgroundSize: 'contain',
-              width: 400,
-              height: 300,
-              marginTop: -15
-            }}></div>
-        }
-      </Grid>
-    </PaperContainer  >
-  )
+	return (
+		<PaperContainer justify="center">
+			<Grid item>
+				<Grid container justify="center">
+					<FormControl variant="outlined" style={{ minWidth: 250, marginBottom: 15 }}>
+						<InputLabel id="chart-label">Choose Chart</InputLabel>
+						<Select value={chart} labelId="chart-label" onChange={handleChartChange} label="Choose Chart">
+							<MenuItem value="bar">Bar</MenuItem>
+							<MenuItem value="area">Area</MenuItem>
+							<MenuItem value="line">Line</MenuItem>
+						</Select>
+					</FormControl>
+				</Grid>
+				{renderChart(chart, loading, response)}
+			</Grid>
+		</PaperContainer  >
+	)
 }
-
-
-
+// For Covid picture
+// Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a
+// 		href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 
 export default Country

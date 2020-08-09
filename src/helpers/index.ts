@@ -1,5 +1,5 @@
 import countries from './countries'
-import { Country, Regions, Data, ModifyResponseCB, RowData, SortOption } from './types'
+import { Country, Regions, Data, ModifyResponseCB, RowData, SortOption, CountryData, S } from './types'
 
 const log = (...messages: any[]) => console.log(...messages)
 
@@ -75,7 +75,7 @@ const groupByRegions = (countries: Country[], data: Data[]) => {
 const capitalize = (str: string): string => {
 	return str[0].toUpperCase() + str.slice(1)
 }
-const ModifyResponseCallback: ModifyResponseCB = (responses) => {
+const ModifyResponseCallback: ModifyResponseCB = (responses: any[][]) => {
 	const result = responses[0].slice(1).reduce((acc: RowData[], current) => {
 		const country = countries.find(o => o.name === current.country)
 		if (country) {
@@ -125,11 +125,48 @@ const filterCallback = (searchTerm: string | number | null, data: RowData[] | nu
 	})
 }
 
+
+const getDifferences = (countryData: any[], rest?: {}): CountryData => {
+	const result: CountryData = {
+		all: [],
+		confirmed: [],
+		deaths: [],
+		recovered: []
+	}
+
+	for (let i = 1, len = countryData.length, [d, k1, k2, k3] = Object.keys(countryData[i]); i < len; i++) {
+		const cur = countryData[i]
+		const prev = countryData[i - 1]
+		const date = new Date(cur.date).toLocaleString().split(',')[0]
+
+		const diff_confirmed = cur[k1] - prev[k1]
+		const diff_deaths = cur[k2] - prev[k2]
+		const diff_recovered = cur[k3] - prev[k3]
+
+		result.confirmed!.push({ [k1]: diff_confirmed, date, ...rest })
+
+		result.deaths!.push({ [k2]: diff_deaths, date, ...rest })
+
+		result.recovered!.push({ [k3]: diff_recovered, date, ...rest })
+
+		result.all!.push({
+			date,
+			[k1]: diff_confirmed,
+			[k2]: diff_deaths,
+			[k3]: diff_recovered,
+			...rest
+		})
+	}
+
+	return result
+}
+
 export {
 	all,
 	log,
 	pick,
 	capitalize,
+	getDifferences,
 	formatNumber,
 	sortCallback,
 	filterCallback,

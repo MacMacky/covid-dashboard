@@ -1,14 +1,17 @@
 import { useLocation } from 'react-router'
 import { capitalize, all } from '.'
-import { ModifyResponseCB } from './types'
 import { useEffect, useState } from 'react'
+import { ModifyResponseCB, CountryRouteProps } from './types'
 
 const useChangeDocumentTitle = () => {
-	const location = useLocation()
+	const location = useLocation<CountryRouteProps>()
 	useEffect(() => {
 		if (location.pathname === '/') {
 			document.title = 'Main'
-		} else {
+		} else if (/world\/.{2,}/.test(location.pathname)) {
+			document.title = location.state.country
+		}
+		else {
 			document.title = capitalize(location.pathname.slice(1))
 		}
 	}, [])

@@ -129,3 +129,5 @@ export interface ChartProps {
 	color: string
 	dataKey: string
 }
+
+export type Chart = 'bar' | 'line' | 'area'

@@ -115,19 +115,31 @@ export interface CountryRecovered extends CountryBase {
 	recovered: number
 }
 
+export interface CountryAll extends CountryDeath, CountryConfirmed, CountryRecovered {
+
+}
+
 export type S = Partial<CountryRecovered>[] | Partial<CountryConfirmed>[] | Partial<CountryDeath>[]
 
 export interface CountryData {
-	deaths?: CountryDeath[]
-	confirmed?: CountryConfirmed[]
-	recovered?: CountryRecovered[]
+	deaths?: Partial<CountryDeath>[]
+	confirmed?: Partial<CountryConfirmed>[]
+	recovered?: Partial<CountryRecovered>[]
+	all?: Partial<CountryAll>[]
 }
 
 export interface ChartProps {
 	loading?: boolean
 	data: any[] | undefined
-	color: string
+	color?: string
 	dataKey: string
+	dataKeys?: string[]
+	isMultipleBars?: boolean
 }
 
 export type Chart = 'bar' | 'line' | 'area'
+
+export interface CountryRouteProps {
+	country: string
+	code: string
+}

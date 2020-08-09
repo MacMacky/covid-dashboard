@@ -1,5 +1,5 @@
 import countries from './countries'
-import { Country, Regions, Data, ModifyResponseCB, RowData, SortOption, CountryData, S } from './types'
+import { Country, Regions, Data, ModifyResponseCB, RowData, SortOption, CountryData, S, CountryRouteProps } from './types'
 
 const log = (...messages: any[]) => console.log(...messages)
 
@@ -161,6 +161,16 @@ const getDifferences = (countryData: any[], rest?: {}): CountryData => {
 	return result
 }
 
+const modifyResponseCountryCB = (state: CountryRouteProps) => {
+	return (response: any[]) => {
+		const { country } = state
+		const _country = country === 'USA' ? 'US' : country === 'UK' ? 'United Kingdom' : country;
+		let countryData = response[0][_country] || []
+		countryData = countryData.slice(countryData.length - 11, countryData.length)
+		return getDifferences(countryData, state)
+	}
+}
+
 export {
 	all,
 	log,
@@ -172,5 +182,6 @@ export {
 	filterCallback,
 	groupByRegions,
 	getCountryData,
-	ModifyResponseCallback
+	ModifyResponseCallback,
+	modifyResponseCountryCB
 }

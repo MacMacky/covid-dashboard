@@ -9,7 +9,7 @@ const CountryToolTip = ({ payload, label, active }: { payload: any, label: strin
 		return (
 			<Paper style={{ padding: 15, textAlign: 'center' }}>
 				<Typography variant="h5" children={country} />
-				<img src={`https://flagcdn.com/w40/${code}.png`} />
+				<img src={`https://flagcdn.com/w40/${code}.png`} alt="Country Flag" />
 				<Typography variant="h6" children={`${capitalize(dataKey)}: ${value}`} style={{ color }} />
 				<Typography variant="body1" children={label} />
 			</Paper>

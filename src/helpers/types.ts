@@ -124,7 +124,7 @@ export interface CountryData {
 }
 
 export interface ChartProps {
-	loading: boolean
+	loading?: boolean
 	data: any[] | undefined
 	color: string
 	dataKey: string

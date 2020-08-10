@@ -15,7 +15,7 @@ const WorldTableRow = memo(({ active, align, cases, todayCases, deaths, recovere
 			style={{ cursor: 'hover' }}
 			onClick={() => {
 				const _country = (country.includes(' ') ? country.split(' ').join('-') : country).toLowerCase()
-				history.push(`/world/${_country}`, { country, code: code?.toLowerCase() })
+				history.push(`/world/${_country}`, { country, code: code?.toLowerCase(), totalCases: cases, totalDeaths: deaths, totalRecovered: recovered })
 			}}>
 			<TableCell align={align}>
 				{code ? <img src={`https://flagcdn.com/w40/${code.toLowerCase()}.png`} /> :

@@ -142,4 +142,7 @@ export type Chart = 'bar' | 'line' | 'area'
 export interface CountryRouteProps {
 	country: string
 	code: string
+	totalCases?: number
+	totalDeaths?: number
+	totalRecovered?: number
 }

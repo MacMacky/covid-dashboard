@@ -7,7 +7,7 @@ import { RouteComponentProps } from 'react-router-dom'
 import { modifyResponseCountryCB } from '../helpers'
 import { MAIN_API, TIME_SERIES_API } from '../helpers/config'
 import { useFetch, useChangeDocumentTitle } from '../helpers/hooks'
-import { GroupAdd, PersonAddDisabled, PeopleAlt, Report } from '@material-ui/icons'
+import { GroupAdd, PersonAddDisabled, PeopleAlt, Report, Healing } from '@material-ui/icons'
 import { Chart, CountryRouteProps, CountryModifiedResponse } from '../helpers/types'
 import { Grid, Select, MenuItem, FormControl, InputLabel, colors } from '@material-ui/core'
 
@@ -30,7 +30,7 @@ const Country = ({ location: { state: { country, code } } }: RouteComponentProps
       <Grid container justify="center" style={{ marginBottom: 50 }}>
         <LabelWithIcon label="Total Cases" loading={loading} value={cases} color={colors.yellow[700]} Icon={PeopleAlt} />
         <LabelWithIcon label="Total Deaths" loading={loading} value={deaths} color={colors.red[400]} Icon={PersonAddDisabled} />
-        <LabelWithIcon label="Total Recovered" loading={loading} value={recovered} color={colors.green[500]} Icon={GroupAdd} />
+        <LabelWithIcon label="Total Recovered" loading={loading} value={recovered} color={colors.green[500]} Icon={Healing} />
       </Grid>
       <Grid container justify="center" style={{ marginBottom: 50 }}>
         <LabelWithIcon label="Active Cases" loading={loading} value={active} color={colors.orange[500]} Icon={GroupAdd} />

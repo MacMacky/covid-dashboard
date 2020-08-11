@@ -153,3 +153,10 @@ export interface CountryModifiedResponse {
   active: number
   critical: number
 }
+
+export interface ToastProps {
+  message: string | null
+  open: boolean
+  type?: "success" | "info" | "warning" | "error" | undefined
+  duration?: number
+}

@@ -44,7 +44,7 @@ export default [
   { name: 'Cambodia', abbr: 'KH', code: '855' },
   { name: 'Cameroon', abbr: 'CM', code: '237' },
   { name: 'Canada', abbr: 'CA', code: '1', suggested: true },
-  { name: 'Cape Verde', abbr: 'CV', code: '238' },
+  { name: 'Cabo Verde', abbr: 'CV', code: '238' },
   { name: 'Cayman Islands', abbr: 'KY', code: '1-345' },
   { name: 'CAR', abbr: 'CF', code: '236' },
   { name: 'Chad', abbr: 'TD', code: '235' },

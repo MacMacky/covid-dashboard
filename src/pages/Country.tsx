@@ -9,8 +9,9 @@ import { MAIN_API, TIME_SERIES_API } from '../helpers/config'
 import { useFetch, useChangeDocumentTitle } from '../helpers/hooks'
 import { GroupAdd, PersonAddDisabled, PeopleAlt, Report, Healing } from '@material-ui/icons'
 import { Chart, CountryRouteProps, CountryModifiedResponse } from '../helpers/types'
-import { Grid, Select, MenuItem, FormControl, InputLabel, colors } from '@material-ui/core'
+import { Grid, Select, MenuItem, FormControl, InputLabel, colors, Typography } from '@material-ui/core'
 import ImageFlag from '../components/ImageFlag'
+import { Skeleton } from '@material-ui/lab'
 
 
 const Country = ({ location: { state: { country, code } } }: RouteComponentProps<{}, {}, CountryRouteProps>) => {
@@ -19,18 +20,20 @@ const Country = ({ location: { state: { country, code } } }: RouteComponentProps
     modifyResponseCountryCB({ country, code }), { data: {} })
   const [chart, setChart] = useState<Chart>('bar')
 
+  useChangeDocumentTitle()
 
   const handleChartChange = (e: any): void => {
     setChart(e.target.value)
   }
 
-  useChangeDocumentTitle()
-
   return (
     <PaperContainer>
       <Grid container justify="center">
         <Grid item md={4} style={{ textAlign: 'center', marginBottom: 25 }}>
-          <ImageFlag code={code} loading={loading} />
+          <Typography variant="h2" gutterBottom>
+            {loading ? <Skeleton /> : country}
+          </Typography>
+          <ImageFlag code={code} loading={loading} withBorder />
         </Grid>
       </Grid>
       <Grid container justify="center" style={{ marginBottom: 50 }}>

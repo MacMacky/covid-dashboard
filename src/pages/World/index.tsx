@@ -7,8 +7,8 @@ import { SortContext } from '../../helpers/contexts'
 import { SortOption } from '../../helpers/types'
 import { PaperContainer } from '../../containers/PaperContainer'
 import { ModifyResponseCallback } from '../../helpers'
-import { useFetch, useChangeDocumentTitle } from '../../helpers/hooks'
 import { TableContainer, Paper, Table, TextField } from '@material-ui/core'
+import { useFetch, useChangeDocumentTitle, useToastCallback } from '../../helpers/hooks'
 import reducer, { SET_CASES, SORT_CASES, UPDATE_SEARCH, initialState } from '../../helpers/reducers/world'
 
 const World = () => {
@@ -16,6 +16,7 @@ const World = () => {
   const [{ filteredAndSortedCases, options, searchTerm }, dispatch] = useReducer(reducer, initialState)
 
   useChangeDocumentTitle()
+  useToastCallback(error)
 
   useEffect(() => {
     const timeout = setTimeout(() => {

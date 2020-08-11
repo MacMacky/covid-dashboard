@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import '../App.css'
+import ImageFlag from '../components/ImageFlag'
 import renderChart from '../components/renderChart'
 import LabelWithIcon from '../components/LabelWithIcon'
+import { Skeleton } from '@material-ui/lab'
 import { PaperContainer } from '../containers/PaperContainer'
 import { RouteComponentProps } from 'react-router-dom'
 import { modifyResponseCountryCB } from '../helpers'
 import { MAIN_API, TIME_SERIES_API } from '../helpers/config'
-import { useFetch, useChangeDocumentTitle } from '../helpers/hooks'
+import { useFetch, useChangeDocumentTitle, useToastCallback } from '../helpers/hooks'
 import { GroupAdd, PersonAddDisabled, PeopleAlt, Report, Healing } from '@material-ui/icons'
 import { Chart, CountryRouteProps, CountryModifiedResponse } from '../helpers/types'
 import { Grid, Select, MenuItem, FormControl, InputLabel, colors, Typography } from '@material-ui/core'
-import ImageFlag from '../components/ImageFlag'
-import { Skeleton } from '@material-ui/lab'
 
 
 const Country = ({ location: { state: { country, code } } }: RouteComponentProps<{}, {}, CountryRouteProps>) => {
@@ -21,6 +21,7 @@ const Country = ({ location: { state: { country, code } } }: RouteComponentProps
   const [chart, setChart] = useState<Chart>('bar')
 
   useChangeDocumentTitle()
+  useToastCallback(error)
 
   const handleChartChange = (e: any): void => {
     setChart(e.target.value)

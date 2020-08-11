@@ -1,6 +1,7 @@
 
 import { createContext } from 'react'
 import theme from '../theme'
+import { ToastProps } from './types'
 
 export const ThemeContext = createContext({
   theme,
@@ -12,3 +13,7 @@ export const SortContext = createContext<{ data: any[] | null, sortData: (sortOp
   sortData: (sortOptions: any) => { }
 })
 
+export const ToastContext = createContext<{ toastProps: ToastProps, toggleToast: (toastProps: ToastProps) => void }>({
+  toastProps: { open: false, message: null },
+  toggleToast: (toastProps: any) => { }
+})

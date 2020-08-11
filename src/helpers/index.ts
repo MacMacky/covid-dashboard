@@ -73,6 +73,7 @@ const groupByRegions = (countries: Country[], data: Data[]) => {
 }
 
 const capitalize = (str: string): string => {
+  if (!str) return ''
   return str[0].toUpperCase() + str.slice(1)
 }
 const ModifyResponseCallback: ModifyResponseCB = (responses: any[][]) => {

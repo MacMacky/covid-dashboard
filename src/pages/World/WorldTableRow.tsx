@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import ImageFlag from '../../components/ImageFlag'
 import { History } from 'history'
 import { formatNumber } from '../../helpers'
 import { Align, RowData } from '../../helpers/types'
@@ -18,8 +19,7 @@ const WorldTableRow = memo(({ active, align, cases, todayCases, deaths, recovere
         history.push(`/world/${_country}`, { country, code: code?.toLowerCase() })
       }}>
       <TableCell align={align}>
-        {code ? <img src={`https://flagcdn.com/w40/${code.toLowerCase()}.png`} /> :
-          null}
+        <ImageFlag width={40} code={code as string} />
         <br />
         {country}
       </TableCell>

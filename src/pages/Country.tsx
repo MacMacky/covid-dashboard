@@ -10,6 +10,7 @@ import { useFetch, useChangeDocumentTitle } from '../helpers/hooks'
 import { GroupAdd, PersonAddDisabled, PeopleAlt, Report, Healing } from '@material-ui/icons'
 import { Chart, CountryRouteProps, CountryModifiedResponse } from '../helpers/types'
 import { Grid, Select, MenuItem, FormControl, InputLabel, colors } from '@material-ui/core'
+import ImageFlag from '../components/ImageFlag'
 
 
 const Country = ({ location: { state: { country, code } } }: RouteComponentProps<{}, {}, CountryRouteProps>) => {
@@ -27,6 +28,11 @@ const Country = ({ location: { state: { country, code } } }: RouteComponentProps
 
   return (
     <PaperContainer>
+      <Grid container justify="center">
+        <Grid item md={4} style={{ textAlign: 'center', marginBottom: 25 }}>
+          <ImageFlag code={code} loading={loading} />
+        </Grid>
+      </Grid>
       <Grid container justify="center" style={{ marginBottom: 50 }}>
         <LabelWithIcon label="Total Cases" loading={loading} value={cases} color={colors.yellow[700]} Icon={PeopleAlt} />
         <LabelWithIcon label="Total Deaths" loading={loading} value={deaths} color={colors.red[400]} Icon={PersonAddDisabled} />

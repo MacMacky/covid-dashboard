@@ -27,7 +27,7 @@ const DataAreaChart = ({ color, data, dataKey, dataKeys }: ChartProps) => {
     </linearGradient>
   }
 
-  return (<ResponsiveContainer width={1100} height={250}>
+  return (<ResponsiveContainer width='99%' height={250}>
     <AreaChart data={data || []}>
       <defs>
         {gradients}

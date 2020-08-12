@@ -19,7 +19,7 @@ const DataBarChart = ({ loading, data, color, dataKey, dataKeys }: ChartProps) =
   }
 
   return (
-    <ResponsiveContainer width={1000} height={250} >
+    <ResponsiveContainer width='99%' height={250} >
       {loading ? <Skeleton height={250} variant="rect" /> :
         <BarChart data={data || []}>
           <CartesianGrid strokeDasharray="3 3" />

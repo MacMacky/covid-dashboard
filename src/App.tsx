@@ -2,7 +2,7 @@ import React from 'react'
 import Main from './pages/Main'
 import About from './pages/About'
 import Toast from './components/Toast'
-import World from './pages/World/index'
+import Countries from './pages/Countries/index'
 import Navbar from './components/Navbar'
 import Country from './pages/Country'
 import { ToastProps } from './helpers/types'
@@ -18,8 +18,8 @@ function App(props: { theme?: Theme, toastProps?: ToastProps }) {
         <Toast {...props.toastProps as ToastProps} />
         <Switch>
           <Route component={Main} path="/" exact />
-          <Route component={Country} path="/world/:country" />
-          <Route component={World} path="/world" />
+          <Route component={Country} path="/countries/:country" />
+          <Route component={Countries} path="/countries" />
           <Route component={About} path="/about" />
           <Redirect to="/" />
         </Switch>

@@ -1,23 +1,26 @@
-import React from 'react';
+import React from 'react'
 import Main from './pages/Main'
+import About from './pages/About'
+import Toast from './components/Toast'
+import World from './pages/World/index'
+import Navbar from './components/Navbar'
 import Country from './pages/Country'
-import World from './pages/World/index';
-import Navbar from './components/Navbar';
-import { ThemeProvider } from '@material-ui/core'
+import { ToastProps } from './helpers/types'
+import { ThemeProvider, Theme } from '@material-ui/core'
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
-import Toast from './components/Toast';
 
 
-function App(props: any) {
+function App(props: { theme?: Theme, toastProps?: ToastProps }) {
   return (
-    <ThemeProvider theme={props.theme}>
+    <ThemeProvider theme={props.theme as Theme}>
       <Router>
         <Navbar />
-        <Toast {...props.toastProps} />
+        <Toast {...props.toastProps as ToastProps} />
         <Switch>
           <Route component={Main} path="/" exact />
           <Route component={Country} path="/world/:country" />
           <Route component={World} path="/world" />
+          <Route component={About} path="/about" />
           <Redirect to="/" />
         </Switch>
       </Router>

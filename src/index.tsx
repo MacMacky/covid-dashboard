@@ -12,13 +12,9 @@ const CovidApp = () => {
   const [currentTheme, setTheme] = useState<Theme>(theme)
   const [toastProps, setToastProps] = useState<ToastProps>({ message: null, open: false, type: 'error' })
 
-  const toggleTheme = (type: 'dark' | 'light') => {
-    setTheme(createTheme(type))
-  }
+  const toggleTheme = (type: 'dark' | 'light') => setTheme(createTheme(type))
 
-  const toggleToast = (toastProps: ToastProps) => {
-    setToastProps(toastProps)
-  }
+  const toggleToast = (toastProps: ToastProps) => setToastProps(toastProps)
 
   return (
     <React.StrictMode>

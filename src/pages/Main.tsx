@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import LabelWithIcon from '../components/LabelWithIcon';
 import { RowData } from '../helpers/types';
 import { MAIN_API } from '../helpers/config';
@@ -13,8 +13,18 @@ function Main() {
     return countries[0]
   }, {})
 
+  const [dateAndTime, setDateAndTime] = useState<string>(new Date().toLocaleString())
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDateAndTime(new Date().toLocaleString())
+    }, 1000)
+    return () => clearInterval(interval)
+  }, [])
+
   useChangeDocumentTitle()
   useToastCallback(error)
+
 
   return (
     <PaperContainer height={875}>
@@ -27,6 +37,11 @@ function Main() {
             <Typography variant="h2" style={{ marginLeft: 10 }}>
               Globe
             </Typography>
+          </Grid>
+        </Grid>
+        <Grid container justify="center">
+          <Grid item>
+            <Typography variant="h3" children={dateAndTime} align="center" gutterBottom />
           </Grid>
         </Grid>
       </Grid>

@@ -35,7 +35,7 @@ function Main() {
           </Grid>
           <Grid item>
             <Typography variant="h2" style={{ marginLeft: 10 }}>
-              Globe
+              World
             </Typography>
           </Grid>
         </Grid>

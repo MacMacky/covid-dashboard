@@ -23,9 +23,9 @@ const Navbar = () => {
       <AppBar position="static" color="primary" style={themeStyles}>
         <Toolbar>
           <Typography children="Covid" variant="h6" style={{ flexGrow: 1 }} />
-          <ButtonLink to="/" label="Main" />
-          <ButtonLink to="/countries" label="Countries" />
-          <ButtonLink to="/about" label="About" />
+          <ButtonLink to={process.env.PUBLIC_URL} label="World" />
+          <ButtonLink to={`${process.env.PUBLIC_URL}/countries`} label="Countries" />
+          <ButtonLink to={`${process.env.PUBLIC_URL}/about`} label="About" />
           <IconButton onClick={() => {
             const newType = type === 'dark' ? 'light' : 'dark'
             setType(newType); setTheme(newType);

@@ -16,7 +16,7 @@ const CountriesTableRow = memo(({ active, align, cases, todayCases, deaths, reco
       style={{ cursor: 'pointer' }}
       onClick={() => {
         const _country = (country.includes(' ') ? country.split(' ').join('-') : country).toLowerCase()
-        history.push(`/countries/${_country}`, { country, code: code?.toLowerCase() })
+        history.push(`${process.env.PUBLIC_URL}/countries/${_country}`, { country, code: code?.toLowerCase() })
       }}>
       <TableCell align={align}>
         <ImageFlag width={40} code={code as string} />

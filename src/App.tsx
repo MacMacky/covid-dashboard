@@ -17,11 +17,11 @@ function App(props: { theme?: Theme, toastProps?: ToastProps }) {
         <Navbar />
         <Toast {...props.toastProps as ToastProps} />
         <Switch>
-          <Route component={Main} path="/" exact />
-          <Route component={Country} path="/countries/:country" />
-          <Route component={Countries} path="/countries" />
-          <Route component={About} path="/about" />
-          <Redirect to="/" />
+          <Route component={Main} path={process.env.PUBLIC_URL} exact />
+          <Route component={Country} path={`${process.env.PUBLIC_URL}/countries/:country`} />
+          <Route component={Countries} path={`${process.env.PUBLIC_URL}/countries`} />
+          <Route component={About} path={`${process.env.PUBLIC_URL}/about`} />
+          <Redirect to={process.env.PUBLIC_URL} />
         </Switch>
       </Router>
     </ThemeProvider>

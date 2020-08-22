@@ -45,10 +45,9 @@ const sortComparison = ({ type, sortBy, orderBy }: SortOption) => (a: any, b: an
   }
 }
 
-const sortCallback = (oldData: RowData[], options: SortOption) => {
-  const newData = oldData.slice().sort(sortComparison(options))
-  return newData
-}
+const sortCallback = (oldData: RowData[], options: SortOption) =>
+  oldData.slice().sort(sortComparison(options))
+
 
 const filterCallback = (searchTerm: string | number | null, data: RowData[] | null) => {
   if (!data) return []

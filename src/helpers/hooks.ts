@@ -7,13 +7,12 @@ import { ModifyResponseCB, CountryRouteProps } from './types'
 const useChangeDocumentTitle = () => {
   const location = useLocation<CountryRouteProps>()
   useEffect(() => {
-    if (location.pathname === '/') {
-      document.title = 'Main'
-    } else if (/world\/.{2,}/.test(location.pathname)) {
+    if (location.pathname === process.env.PUBLIC_URL) {
+      document.title = 'World'
+    } else if (/covid-dashboard\/countries\/.{2,}/.test(location.pathname)) {
       document.title = location.state.country
-    }
-    else {
-      document.title = capitalize(location.pathname.slice(1))
+    } else {
+      document.title = capitalize(location.pathname.split('/').pop() as string)
     }
   }, [])
 }

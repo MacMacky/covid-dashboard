@@ -27,14 +27,14 @@ function Main() {
 
 
   return (
-    <PaperContainer height={875}>
+    <PaperContainer >
       <Grid container justify="center" style={{ marginBottom: 30 }}>
         <Grid container justify="center">
           <Grid item>
-            <Language style={{ fontSize: 60, color: colors.brown[500] }} />
+            <Language className="responsive-icon" style={{ color: colors.brown[500] }} />
           </Grid>
           <Grid item>
-            <Typography variant="h2" style={{ marginLeft: 10 }}>
+            <Typography variant="h2" style={{ marginLeft: 10 }} gutterBottom>
               World
             </Typography>
           </Grid>

@@ -13,7 +13,7 @@ interface WorldTableRowData extends RowData {
 const CountriesTableRow = memo(({ active, align, cases, todayCases, deaths, recovered, critical, code, country, history }: WorldTableRowData) => {
   return (
     <TableRow hover
-      style={{ cursor: 'pointer' }}
+      className="hover"
       onClick={() => {
         const _country = (country.includes(' ') ? country.split(' ').join('-') : country).toLowerCase()
         history.push(`${process.env.PUBLIC_URL}/countries/${_country}`, { country, code: code?.toLowerCase() })

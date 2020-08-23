@@ -4,7 +4,7 @@ import { Skeleton } from '@material-ui/lab'
 const ImageFlag = ({ loading, code, width = 320, height = 190, withBorder = false }:
   { loading?: boolean, code?: string, width?: number, height?: number, withBorder?: boolean }) => {
   if (!code && !loading) {
-    return <img src='/white-flag.gif' style={{ borderRadius: 3, width }} alt="No Flag" />
+    return <img src={`${process.env.PUBLIC_URL}/white-flag.gif`} style={{ borderRadius: 3, width }} alt="No Flag" />
   }
 
   return (

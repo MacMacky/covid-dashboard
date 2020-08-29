@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import ButtonLink from './ButtonLink'
+import { ThemeType } from '../helpers/types'
 import { ThemeContext } from '../helpers/contexts'
 import { Brightness2Outlined as Moon, WbSunny as Sun } from '@material-ui/icons'
 import { AppBar, Toolbar, Typography, IconButton, colors } from '@material-ui/core'
@@ -8,7 +9,7 @@ import { AppBar, Toolbar, Typography, IconButton, colors } from '@material-ui/co
 const Navbar = () => {
 	const [themeStyles, setThemeStyles] = useState<any>({})
 	const { setTheme, theme } = useContext(ThemeContext)
-	const [type, setType] = useState<'dark' | 'light'>('light')
+	const [type, setType] = useState<ThemeType>('light')
 
 	useEffect(() => {
 		if (type === 'dark') {
@@ -20,12 +21,8 @@ const Navbar = () => {
 
 	useEffect(() => {
 		const type = localStorage.getItem('_theme')
-		if (type === 'dark') {
-			setType(type); setTheme(type);
-			setThemeStyles({ backgroundColor: theme.palette.background.paper })
-		} else {
-			setThemeStyles({ backgroundColor: theme.palette.primary.main })
-		}
+		setType(type as ThemeType);
+		setTheme(type as ThemeType);
 	}, [])
 
 

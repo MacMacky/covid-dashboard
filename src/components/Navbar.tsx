@@ -20,7 +20,7 @@ const Navbar = () => {
 	}, [type])
 
 	useEffect(() => {
-		const type = localStorage.getItem('_theme')
+		const type = localStorage.getItem('_theme') || 'light'
 		setType(type as ThemeType);
 		setTheme(type as ThemeType);
 	}, [])

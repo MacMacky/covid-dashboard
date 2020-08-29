@@ -7,7 +7,7 @@ import { ModifyResponseCB, CountryRouteProps } from './types'
 const useChangeDocumentTitle = () => {
 	const location = useLocation<CountryRouteProps>()
 	useEffect(() => {
-		if (location.pathname === process.env.PUBLIC_URL) {
+		if (/^\/covid-dashboard\/?$/.test(location.pathname)) {
 			document.title = 'World'
 		} else if (/covid-dashboard\/countries\/.{2,}/.test(location.pathname)) {
 			document.title = location.state?.country || localStorage.getItem('_country') as string

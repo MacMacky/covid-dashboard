@@ -6,36 +6,48 @@ import { AppBar, Toolbar, Typography, IconButton, colors } from '@material-ui/co
 
 
 const Navbar = () => {
-  const [themeStyles, setThemeStyles] = useState<any>({})
-  const { setTheme, theme } = useContext(ThemeContext)
-  const [type, setType] = useState<'dark' | 'light'>('light')
+	const [themeStyles, setThemeStyles] = useState<any>({})
+	const { setTheme, theme } = useContext(ThemeContext)
+	const [type, setType] = useState<'dark' | 'light'>('light')
 
-  useEffect(() => {
-    if (type === 'dark') {
-      setThemeStyles({ backgroundColor: theme.palette.background.paper })
-    } else {
-      setThemeStyles({ backgroundColor: theme.palette.primary.main })
-    }
-  }, [type])
+	useEffect(() => {
+		if (type === 'dark') {
+			setThemeStyles({ backgroundColor: theme.palette.background.paper })
+		} else {
+			setThemeStyles({ backgroundColor: theme.palette.primary.main })
+		}
+	}, [type])
 
-  return (
-    <div style={{ flexGrow: 1 }}>
-      <AppBar position="static" color="primary" style={themeStyles}>
-        <Toolbar>
-          <Typography children="Covid" variant="h6" style={{ flexGrow: 1 }} />
-          <ButtonLink to={process.env.PUBLIC_URL} label="World" />
-          <ButtonLink to={`${process.env.PUBLIC_URL}/countries`} label="Countries" />
-          <ButtonLink to={`${process.env.PUBLIC_URL}/about`} label="About" />
-          <IconButton onClick={() => {
-            const newType = type === 'dark' ? 'light' : 'dark'
-            setType(newType); setTheme(newType);
-          }}>
-            {type === 'light' ? <Moon style={{ fill: colors.grey[800] }} /> : <Sun style={{ fill: colors.yellow[200] }} />}
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-    </div>
-  )
+	useEffect(() => {
+		const type = localStorage.getItem('_theme')
+		if (type === 'dark') {
+			setType(type); setTheme(type);
+			setThemeStyles({ backgroundColor: theme.palette.background.paper })
+		} else {
+			setThemeStyles({ backgroundColor: theme.palette.primary.main })
+		}
+	}, [])
+
+
+	return (
+		<div style={{ flexGrow: 1 }}>
+			<AppBar position="static" color="primary" style={themeStyles}>
+				<Toolbar>
+					<Typography children="Covid" variant="h6" style={{ flexGrow: 1 }} />
+					<ButtonLink to={process.env.PUBLIC_URL} label="World" />
+					<ButtonLink to={`${process.env.PUBLIC_URL}/countries`} label="Countries" />
+					<ButtonLink to={`${process.env.PUBLIC_URL}/about`} label="About" />
+					<IconButton onClick={() => {
+						const newType = type === 'dark' ? 'light' : 'dark'
+						localStorage.setItem('_theme', newType)
+						setType(newType); setTheme(newType);
+					}}>
+						{type === 'light' ? <Moon style={{ fill: colors.grey[800] }} /> : <Sun style={{ fill: colors.yellow[200] }} />}
+					</IconButton>
+				</Toolbar>
+			</AppBar>
+		</div>
+	)
 }
 
 
